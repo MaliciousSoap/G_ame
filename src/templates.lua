@@ -1,15 +1,37 @@
 require("QOL")
+local utf8 = require("utf8")  -- stole this no idea how this works
+local byteoffset
 --
 
-coordinateTemplate = {}
-coordinateTemplate.y = 0
-coordinateTemplate.x = 0
+coordinateTemplate = {
+    y = 0,
+    x = 0,
+}
 setSelf(coordinateTemplate)  -- Because Lua is dumb that's why
 
 imageTemplate = {}
 
-objectTemplate = {}
+objectTemplate = {
+    sy = 1,
+    sx = 1
+}
 setmetatable(objectTemplate,coordinateTemplate)
-objectTemplate.sy = 1
-objectTemplate.sx = 1
 setSelf(objectTemplate)
+
+--Because backspace is a method as opposed to a method, when calling
+--refer to it by saying <table>.backspace()
+textLineTemplate = {
+    text = "",
+    backspace = function()
+    -- get the byte offset to the last UTF-8 character in the string.
+        byteoffset = utf8.offset(text, -1)
+
+        if byteoffset then
+            -- remove the last UTF-8 character.
+            -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
+            text = string.sub(text, 1, byteoffset - 1)
+        end
+    end
+}
+
+setSelf(textLineTemplate)
