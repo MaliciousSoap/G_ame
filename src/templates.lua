@@ -18,18 +18,18 @@ objectTemplate = {
 setmetatable(objectTemplate,coordinateTemplate)
 setSelf(objectTemplate)
 
---Because backspace is a method as opposed to a method, when calling
+--Because backspace is a method as opposed to a function, when calling
 --refer to it by saying <table>.backspace()
 textLineTemplate = {
-    text = "",
-    backspace = function()
+    text = "teststring",
+    backspace = function(self) -- do not ask me why I need to use self., I will not be able to explain
     -- get the byte offset to the last UTF-8 character in the string.
-        byteoffset = utf8.offset(text, -1)
+        byteoffset = utf8.offset(self.text, -1)
 
         if byteoffset then
             -- remove the last UTF-8 character.
             -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
-            text = string.sub(text, 1, byteoffset - 1)
+            self.text = string.sub(self.text, 1, byteoffset - 1)
         end
     end
 }
