@@ -28,16 +28,21 @@ function love.update(deltaTime)
 end
 
 function love.textinput(t)
-    textLine1.text = textLine1.text .. t
+    textLine1:add(t)
 end
 
 --Check for function characters like backspace
-function love.keypressed(key) 
+function love.keypressed(key, scanCode, isHeld) 
     if key == "backspace" then
-        textLine1:backspace(textLine1.text)
+        textLine1:backspace()
+        if isHeld then
+            while (key == "backspace" and isHeld) do
+                love.event.quit()
+            end
+        end
     end
-    if key == "enter" then 
-        textLines[#textLines+1] = textLine  --Add 1 cause lua sucks
+    if key == "return" then 
+        textLine1:add("\n")  --Add 1 cause lua sucks
     end
 end
 

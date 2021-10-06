@@ -21,7 +21,8 @@ setSelf(objectTemplate)
 --Because backspace is a method as opposed to a function, when calling
 --refer to it by saying <table>:backspace()
 textLineTemplate = {
-    text = ""
+    text = "",
+
     backspace = function(self) -- self is not implied
     -- get the byte offset to the last UTF-8 character in the string.
         byteoffset = utf8.offset(self.text, -1)
@@ -31,6 +32,15 @@ textLineTemplate = {
             -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
             self.text = string.sub(self.text, 1, byteoffset - 1)
         end
+    end,
+
+    add = function (self, appendText) 
+        self.text = self.text .. appendText
+    end,
+
+    -- I use both interchangebly
+    append = function (self, appendText) 
+        self.text = self.text .. appendText
     end
 }
 
