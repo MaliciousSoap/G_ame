@@ -6,8 +6,11 @@ require("objects")
 local str = "F"
 local i = 0
 local sigmaTime = 0 
+--
 local text = ""
-local text2 = {}
+local textLine1 = {}
+local textLines = {}
+local textLineNum = 0
 --
 
 
@@ -15,8 +18,8 @@ local text2 = {}
 --Handles the initialization stuff; mostly file stream reading
 function love.load() 
 --    imageTest = love.graphics.newImage("images/test.png")
-setmetatable(text2,textLineTemplate)
-setSelf(text2)
+    setmetatable(textLine1,textLineTemplate)
+    setSelf(textLine1)
 end
 
 --Better for updates cause not just called every tick, we know time between ticks
@@ -25,15 +28,16 @@ function love.update(deltaTime)
 end
 
 function love.textinput(t)
-    text2.text = text2.text .. t
+    textLine1.text = textLine1.text .. t
 end
 
 --Check for function characters like backspace
 function love.keypressed(key) 
     if key == "backspace" then
-        text2.backspace(text2.text)
+        textLine1:backspace(textLine1.text)
     end
     if key == "enter" then 
+        textLines[#textLines+1] = textLine  --Add 1 cause lua sucks
     end
 end
 
@@ -42,6 +46,6 @@ function love.draw()
 
 
     
-    love.graphics.printf(text2.text, 0, 0, love.graphics.getWidth())
+    love.graphics.printf(textLine1.text, 0, 0, love.graphics.getWidth())
 end
 
