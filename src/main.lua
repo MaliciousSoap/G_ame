@@ -1,6 +1,7 @@
 require("templates")
 require("QOL")
 require("objects")
+require("io")
 
 --Read readme.md before doing anything
 local str = "F"
@@ -18,7 +19,7 @@ local textLineNum = 0
 --
 local heldKeys = {}
 --
-
+local cmd
 
 
 --Handles the initialization stuff; mostly file stream reading
@@ -29,7 +30,8 @@ function love.load()
     initialize(textLine2, textLineTemplate)
     initialize(textLine3, textLineTemplate)
     initialize(textLine4, textLineTemplate)
-    
+   
+    cmd = io.open("cmd.txt")
 end
 
 --Better for updates cause not just called every tick, we know time between ticks
@@ -83,10 +85,17 @@ function love.draw()
     --
     textLine2.text = dump(heldKeys)
     textLine3.text = debugVar
+
+
+    if ((heldKeys[1] == "lctrl" or heldKeys[1] == "rctrl") and heldKeys[2] == "backspace") then
+        textLine1.text = nil 
+    end
+
     
     love.graphics.printf("Input: "..textLine1.text, 0, 0, love.graphics.getWidth())
     love.graphics.printf("Held Keys: "..textLine2.text,0,100,love.graphics.getWidth())
     love.graphics.printf("Split Input: "..textLine3.text, 0, 200 , love.graphics.getWidth())
     love.graphics.printf("Output: "..textLine4.text, 0, 300 , love.graphics.getWidth())
+    love.graphics.printf(cmd:read("*all"), 0, 400, love.graphics.getWidth())
 end
 
