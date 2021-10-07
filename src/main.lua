@@ -62,18 +62,26 @@ end
 
 --Called every tick, automatic heap and canvas clearing
 function love.draw()
+    local splittl1 = split(textLine1.text, "+")
     --Text Analysis
 
+    --Debugging Split Input as Dump
     debugVar = dump(split(textLine1.text, "+"))
-    textLine4.text  = split(textLine1.text,"+")[1] + split(textLine1.text,"+")[2]
+    --
+    if tonumber(split(textLine1.text,"+")[2]) ~= nil then
+        textLine4.text  = tonumber(split(textLine1.text,"+")[1]) + tonumber(split(textLine1.text,"+")[2])
 
+    else
+        textLine4.text = nil
+    end
+   
     --
     textLine2.text = dump(heldKeys)
     textLine3.text = debugVar
     
-    love.graphics.printf(textLine1.text, 0, 0, love.graphics.getWidth())
-    love.graphics.printf(textLine2.text,0,100,love.graphics.getWidth())
-    love.graphics.printf(textLine3.text, 0, 200 , love.graphics.getWidth())
-    love.graphics.printf(textLine4.text, 0, 300 , love.graphics.getWidth())
+    love.graphics.printf("Input: "..textLine1.text, 0, 0, love.graphics.getWidth())
+    love.graphics.printf("Held Keys: "..textLine2.text,0,100,love.graphics.getWidth())
+    love.graphics.printf("Split Input: "..textLine3.text, 0, 200 , love.graphics.getWidth())
+    love.graphics.printf("Output: "..textLine4.text, 0, 300 , love.graphics.getWidth())
 end
 
