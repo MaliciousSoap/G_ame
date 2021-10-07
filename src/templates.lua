@@ -2,6 +2,10 @@ require("QOL")
 local utf8 = require("utf8")  -- stole this no idea how this works
 local byteoffset
 --
+dictionaryTemplate = {
+
+}
+setSelf(dictionaryTemplate)
 
 coordinateTemplate = {
     y = 0,

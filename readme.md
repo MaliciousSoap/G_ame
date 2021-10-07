@@ -14,3 +14,4 @@ Love2d General docs:
         sx,
         sy
     )
+    set the keys to nil to remove them from table
