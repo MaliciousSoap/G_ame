@@ -35,7 +35,28 @@ function initialize(ta_ble, metata_ble)
 end
 
 
+--check nil
+function nilCheck(table) 
+    if #table == 1 then
 
+        return false
+    end
+
+
+    local infectedFalse = true
+    
+    for i = 1, #table do
+        if (table[i] == nil or table[i] == "" or tonumber(table[i]) ~= nil) then
+            return false
+        end
+    end
+  --  return infectedFalse
+
+    return true
+    
+    
+        
+end
 --Unknown 
 
 function dump(o)
@@ -58,3 +79,4 @@ function dump(o)
     end
     return result;
 end
+
