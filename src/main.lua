@@ -12,6 +12,7 @@ local text = ""
 local textLine1 = {}
 local textLine2 = {}
 local textLine3 = {}
+local textLine4 = {}
 local textLines = {}
 local textLineNum = 0
 --
@@ -27,7 +28,7 @@ function love.load()
     initialize(textLine1, textLineTemplate)
     initialize(textLine2, textLineTemplate)
     initialize(textLine3, textLineTemplate)
-
+    initialize(textLine4, textLineTemplate)
     
 end
 
@@ -64,7 +65,7 @@ function love.draw()
     --Text Analysis
 
     debugVar = dump(split(textLine1.text, "+"))
-
+    textLine4.text  = split(textLine1.text,"+")[1] + split(textLine1.text,"+")[2]
 
     --
     textLine2.text = dump(heldKeys)
@@ -73,6 +74,6 @@ function love.draw()
     love.graphics.printf(textLine1.text, 0, 0, love.graphics.getWidth())
     love.graphics.printf(textLine2.text,0,100,love.graphics.getWidth())
     love.graphics.printf(textLine3.text, 0, 200 , love.graphics.getWidth())
-    love.graphics.printf(textLine3.text, 0, 200 , love.graphics.getWidth())
+    love.graphics.printf(textLine4.text, 0, 300 , love.graphics.getWidth())
 end
 
