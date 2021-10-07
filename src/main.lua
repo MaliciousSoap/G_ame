@@ -68,11 +68,16 @@ function love.draw()
     --Debugging Split Input as Dump
     debugVar = dump(splitOne)
     --
-    if tonumber(splitOne[2]) ~= nil then
-        textLine4.text  = tonumber(splitOne[1]) + tonumber(splitOne[2])
+    if nilCheck(splitOne) then
+        local sum = 0
+        --textLine4.text = "it worked" --  = 
+        for counter = 1, #splitOne do
+            sum = tonumber(splitOne[counter]) + sum
 
+        end
+        textLine4.text = sum
     else
-        textLine4.text = nil
+       -- textLine4.text = "Error"
     end
    
     --

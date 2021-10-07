@@ -46,7 +46,7 @@ function nilCheck(table)
     local infectedFalse = true
     
     for i = 1, #table do
-        if (table[i] == nil or table[i] == "" or tonumber(table[i]) ~= nil) then
+        if (tonumber(table[i]) == nil) then
             return false
         end
     end
