@@ -62,14 +62,14 @@ end
 
 --Called every tick, automatic heap and canvas clearing
 function love.draw()
-    local splittl1 = split(textLine1.text, "+")
+    local splitOne = split(textLine1.text, "+")
     --Text Analysis
 
     --Debugging Split Input as Dump
-    debugVar = dump(split(textLine1.text, "+"))
+    debugVar = dump(splitOne)
     --
-    if tonumber(split(textLine1.text,"+")[2]) ~= nil then
-        textLine4.text  = tonumber(split(textLine1.text,"+")[1]) + tonumber(split(textLine1.text,"+")[2])
+    if tonumber(splitOne[2]) ~= nil then
+        textLine4.text  = tonumber(splitOne[1]) + tonumber(splitOne[2])
 
     else
         textLine4.text = nil
