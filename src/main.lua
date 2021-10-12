@@ -68,25 +68,7 @@ function love.draw()
     --Debugging Split Input as Dump
     debugVar = dump(splitOne)
     --
-    if nilCheck(splitOne) then
-        local sum = 0
-        --textLine4.text = "it worked" --  = 
-        for counter = 1, #splitOne do
-            sum = tonumber(splitOne[counter]) + sum
 
-        end
-        textLine4.text = sum
-    else
-       -- textLine4.text = "Error"
-    end
-   
-    --
-    textLine2.text = dump(heldKeys)
-    textLine3.text = debugVar
-    
     love.graphics.printf("Input: "..textLine1.text, 0, 0, love.graphics.getWidth())
-    love.graphics.printf("Held Keys: "..textLine2.text,0,100,love.graphics.getWidth())
-    love.graphics.printf("Split Input: "..textLine3.text, 0, 200 , love.graphics.getWidth())
-    love.graphics.printf("Output: "..textLine4.text, 0, 300 , love.graphics.getWidth())
 end
 

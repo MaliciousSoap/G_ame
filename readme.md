@@ -15,3 +15,17 @@ Love2d General docs:
         sy
     )
     set the keys to nil to remove them from table
+
+
+important code that I removed
+    if nilCheck(splitOne) then
+        local sum = 0
+        --textLine4.text = "it worked" --  = 
+        for counter = 1, #splitOne do
+            sum = tonumber(splitOne[counter]) + sum
+
+        end
+        textLine4.text = sum
+    else
+       -- textLine4.text = "Error"
+    end
