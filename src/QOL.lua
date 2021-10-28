@@ -59,6 +59,7 @@ function nilCheck(table)
 end
 --Unknown 
 
+--Stringify Table
 function dump(o)
     if type(o) == 'table' then
        local s = '{ '
@@ -72,6 +73,7 @@ function dump(o)
     end
  end
 
+ --Arrayify input with each element being prefixed by the delimiter character
  function split(s, delimiter)
     result = {};
     for match in (s..delimiter):gmatch("(.-)"..delimiter) do
@@ -80,3 +82,23 @@ function dump(o)
     return result;
 end
 
+
+function has(list, value)
+    for i =1, #list do
+        if (list[i] == value) then
+            return true
+        end
+
+    end
+    return false
+end
+
+
+function removeVal(list, value)
+    for i = 1, #list do
+        if (list[i] == value) then
+            list[i] = nil
+        end
+
+    end
+end
