@@ -18,7 +18,7 @@ local textLineNum = 0
 --
 local heldKeys = {}
 --
-
+local backspaceHeldTicks = 0 
 
 
 --Handles the initialization stuff; mostly file stream reading
@@ -58,13 +58,27 @@ end
 --Removes key from heldKeys index
 function love.keyreleased(key) 
     remove(heldKeys,key)
+    if key == "backspace" then
+        backspaceHeldTicks = 0
+    end
 end
 
 --Called every tick, automatic heap and canvas clearing
 function love.draw()
-    local splitOne = split(textLine1.text, "+")
-    --Text Analysis
+    --If Backspace held then go fast backspace
+    if (has(heldKeys, "backspace")) then
+        backspaceHeldTicks = backspaceHeldTicks + 1
+        if backspaceHeldTicks > 20 then
+            textLine1:backspace()
+        end
+    end
 
+
+
+
+
+    local splitOne = split(textLine1.text, "+")
+   
     --Debugging Split Input as Dump
     debugVar = dump(splitOne)
     --
